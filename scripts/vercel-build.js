@@ -86,7 +86,8 @@ if (process.platform !== 'win32') {
   console.log(`[Roomwise Build] Compiling C++17 scheduling engine with ${compiler}...`);
   execFileSync(compiler, args, { stdio: 'inherit' });
   fs.chmodSync(outBin, 0o755);
-  console.log(`[Roomwise Build] Compiled native C++17 binary: ${outBin}`);
+  const stat = fs.statSync(outBin);
+  console.log(`[Roomwise Build] Compiled native C++17 binary: ${outBin} (${stat.size} bytes)`);
 } else {
   console.log('[Roomwise Build] Windows host detected; skipping Linux binary step (use build.bat for Windows binaries).');
 }
