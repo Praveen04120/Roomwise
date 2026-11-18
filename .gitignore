@@ -1,0 +1,40 @@
+# Build artifacts & compiled executables
+*.obj
+*.o
+*.exe
+*.out
+*.ilk
+*.pdb
+build/
+CMakeFiles/
+CMakeCache.txt
+cmake_install.cmake
+Makefile
+roomwise
+roomwise_cli
+test_scheduler
+api/bin/
+public/
+
+# Environment & private configuration files
+.env
+.env.*
+!.env.example
+
+# Runtime session state, logs & temporary test directories
+data/active_sessions.json
+*.log
+*.tmp
+test_data_dir/
+tmp_test_*/
+
+# Node / Vercel local artifacts
+node_modules/
+.vercel/
+
+# IDE & OS files
+.vscode/
+.idea/
+*.swp
+.DS_Store
+Thumbs.db

@@ -1,0 +1,13 @@
+room_number,section,subject,day,start_time,end_time
+101,CSCB,Data Structures,Monday,09:00,10:00
+101,CSCA,Mathematics,Monday,10:00,11:00
+102,CSCC,Operating Systems,Monday,09:00,10:00
+103,CSCD,Discrete Mathematics,Monday,11:30,12:30
+104,IT-1A,Digital Logic,Monday,14:00,15:30
+201,CSE-2A,Design & Analysis of Algorithms,Tuesday,09:00,10:00
+201,CSE-2A,Theory of Computation,Tuesday,10:00,11:00
+202,CSE-2B,Database Management Systems,Tuesday,11:30,12:30
+301,CSE-3A,Computer Networks,Wednesday,09:00,10:00
+302,CSE-3B,Software Engineering,Wednesday,10:00,11:00
+401,CSE-4A,Artificial Intelligence,Thursday,13:00,14:00
+501,AIML-1,Machine Learning Lab,Friday,14:00,16:00

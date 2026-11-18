@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Roomwise — Empty Classroom Finder | Campus Utility</title>
+  <meta name="description" content="Discover free classrooms across your college building in seconds. Check live availability, class schedules, and future room slots.">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%231e3a8a'><path d='M3 21h18M5 21V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v16M9 9h1M9 13h1M9 17h1M14 9h1M14 13h1M14 17h1'/></svg>">
+</head>
+<body>
+
+  <!-- Navigation Bar -->
+  <header class="navbar">
+    <div class="container nav-container">
+      <a href="#hero" class="logo-group" id="logoLink">
+        <div class="logo-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M3 21h18M5 21V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v16M9 9h1M9 13h1M9 17h1M14 9h1M14 13h1M14 17h1"/>
+          </svg>
+        </div>
+        <div>
+          <span class="logo-title">Roomwise <span class="logo-badge">Campus Live</span></span>
+        </div>
+      </a>
+
+      <nav aria-label="Primary navigation">
+        <ul class="nav-links" id="navLinks">
+          <li><a href="#hero" class="active" id="navHome">Home</a></li>
+          <li><a href="#building-section" id="navExplore">Explore Floors</a></li>
+          <li><a href="#search-section" id="navFind">Find Empty Rooms</a></li>
+          <li><a href="#about-section" id="navAbout">About</a></li>
+        </ul>
+      </nav>
+
+      <div class="nav-right-group">
+        <div class="nav-live-clock" id="navLiveClock">
+          <span class="live-pulse"></span>
+          <span id="liveClockText">Live Campus Status</span>
+        </div>
+        <button type="button" class="mobile-toggle" id="mobileMenuBtn" aria-label="Toggle navigation menu" aria-expanded="false" onclick="window.RoomwiseApp.toggleMobileMenu()">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="3" y1="6" x2="21" y2="6"></line>
+            <line x1="3" y1="12" x2="21" y2="12"></line>
+            <line x1="3" y1="18" x2="21" y2="18"></line>
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile Navigation Drawer -->
+    <div class="mobile-nav-drawer" id="mobileNavDrawer">
+      <a href="#hero" onclick="window.RoomwiseApp.closeMobileMenu()">Home</a>
+      <a href="#building-section" onclick="window.RoomwiseApp.closeMobileMenu()">Explore Floors</a>
+      <a href="#search-section" onclick="window.RoomwiseApp.closeMobileMenu()">Find Empty Rooms</a>
+      <a href="#about-section" onclick="window.RoomwiseApp.closeMobileMenu()">About</a>
+      <a href="/admin" onclick="window.RoomwiseApp.closeMobileMenu()">Admin Portal</a>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero-section" id="hero">
+    <div class="container hero-grid">
+      <div class="hero-content">
+        <h1>Find Your Space.<br><span class="highlight">Focus on What Matters.</span></h1>
+        <p class="hero-subtitle">
+          Discover available classrooms across your 9-floor campus in seconds. Real-time scheduling, gap detection, and forward planning for study sessions and group projects.
+        </p>
+        <div class="hero-actions">
+          <a href="#search-section" class="btn btn-pink" id="btnHeroFind">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="11" cy="11" r="8"></circle>
+              <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+            </svg>
+            Find Empty Classroom
+          </a>
+          <a href="#building-section" class="btn btn-primary" id="btnHeroExplore">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M3 21h18M5 21V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v16M9 9h1M9 13h1M9 17h1M14 9h1M14 13h1M14 17h1"/>
+            </svg>
+            Explore Building
+          </a>
+        </div>
+      </div>
+
+      <div class="hero-visual">
+        <div class="building-stack-card">
+          <div class="stack-header">
+            <div>
+              <div class="stack-title" id="heroBuildingTitle">Academic Block</div>
+              <small style="color: var(--text-muted); font-size: 0.75rem;" id="heroCollegeTitle">Institute Campus</small>
+            </div>
+            <span class="logo-badge" id="heroTermBadge" style="background: var(--status-avail-bg); color: var(--status-avail-text); border-color: var(--status-avail-border);">
+              Active Term
+            </span>
+          </div>
+
+          <div class="mini-floors" id="heroMiniStack">
+            <div class="mini-floor-row"><span>Loading floors...</span><span class="mini-indicator">--</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Summary Cards -->
+  <section class="summary-section">
+    <div class="container">
+      <div class="summary-grid">
+        <div class="stat-card" id="cardTotalRooms">
+          <div class="stat-icon icon-blue">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 3v18M15 3v18M3 9h18M3 15h18"/></svg>
+          </div>
+          <div class="stat-info">
+            <div class="stat-num" id="summaryTotalRooms">--</div>
+            <div class="stat-label">Total Classrooms</div>
+          </div>
+        </div>
+
+        <div class="stat-card" id="cardAvailableRooms">
+          <div class="stat-icon icon-green">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+          </div>
+          <div class="stat-info">
+            <div class="stat-num" id="summaryAvailableRooms" style="color: var(--status-avail-text);">--</div>
+            <div class="stat-label" id="summaryAvailableLabel">Currently Free Rooms</div>
+          </div>
+        </div>
+
+        <div class="stat-card" id="cardOccupiedRooms">
+          <div class="stat-icon icon-red">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>
+          </div>
+          <div class="stat-info">
+            <div class="stat-num" id="summaryOccupiedRooms" style="color: var(--status-occ-text);">--</div>
+            <div class="stat-label">Currently Occupied</div>
+          </div>
+        </div>
+
+        <div class="stat-card" id="cardTotalFloors">
+          <div class="stat-icon icon-pink">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>
+          </div>
+          <div class="stat-info">
+            <div class="stat-num" id="summaryTotalFloors">--</div>
+            <div class="stat-label">Configured Floors</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section: Find Empty Classroom -->
+  <section class="search-section" id="search-section">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">Instant Gap Finder</span>
+        <h2 class="section-title">Find an Empty Classroom</h2>
+        <p class="section-subtitle">
+          Query classroom availability across any floor for specific study hours, today or on future dates.
+        </p>
+      </div>
+
+      <div class="search-box-card">
+        <form id="searchForm" onsubmit="event.preventDefault(); window.RoomwiseApp.executeSearch();">
+          <div class="search-form-grid">
+            <div class="form-group">
+              <label for="searchDate">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+                Date &amp; Day
+              </label>
+              <input type="date" id="searchDate" class="form-input" required>
+            </div>
+
+            <div class="form-group">
+              <label for="searchStartTime">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                Start Time
+              </label>
+              <input type="time" id="searchStartTime" class="form-input" value="09:00" required>
+            </div>
+
+            <div class="form-group">
+              <label for="searchEndTime">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                End Time
+              </label>
+              <input type="time" id="searchEndTime" class="form-input" value="10:00" required>
+            </div>
+
+            <div class="form-group">
+              <label for="searchFloor">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 2 7 12 12 22 7 12 2"/></svg>
+                Floor Scope
+              </label>
+              <select id="searchFloor" class="form-select">
+                <option value="0">All Floors</option>
+              </select>
+            </div>
+
+            <button type="submit" class="btn btn-primary" id="btnExecuteSearch" style="height: 46px;">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+              Find Rooms
+            </button>
+          </div>
+
+          <div class="search-presets">
+            <span class="preset-label">Quick Presets:</span>
+            <button type="button" class="preset-chip" data-preset="now" onclick="window.RoomwiseApp.setPreset('now', this)">Current Slot</button>
+            <button type="button" class="preset-chip" data-preset="next_hour" onclick="window.RoomwiseApp.setPreset('next_hour', this)">Next 1 Hour</button>
+            <button type="button" class="preset-chip" data-preset="morning" onclick="window.RoomwiseApp.setPreset('morning', this)">Morning (10:00 - 11:00)</button>
+            <button type="button" class="preset-chip" data-preset="afternoon" onclick="window.RoomwiseApp.setPreset('afternoon', this)">Afternoon (14:00 - 15:00)</button>
+            <button type="button" class="preset-chip" data-preset="fullday" onclick="window.RoomwiseApp.setPreset('fullday', this)">Full Day Operating Hours</button>
+
+            <div class="day-toggle-wrap">
+              <input type="checkbox" id="fullDayBreakdownToggle" onchange="window.RoomwiseApp.toggleFullDayView(this.checked)">
+              <label for="fullDayBreakdownToggle" style="cursor: pointer;">Show full-day slots breakdown</label>
+            </div>
+          </div>
+        </form>
+      </div>
+
+      <!-- Results Display Container -->
+      <div id="searchResultsSection">
+        <div class="search-results-header">
+          <div>
+            <h3 style="font-size: 1.25rem; font-weight: 800; color: var(--primary-900);" id="resultsHeaderTitle">
+              Available Classrooms
+            </h3>
+            <span style="font-size: 0.85rem; color: var(--text-muted);" id="resultsHeaderSubtitle">
+              Rooms confirmed with zero overlapping classes throughout the entire interval.
+            </span>
+          </div>
+          <span class="results-count-badge" id="resultsCountBadge">0 Free Classrooms</span>
+        </div>
+
+        <div class="results-grid" id="searchResultsGrid">
+          <!-- Room result cards inserted dynamically -->
+        </div>
+
+        <!-- Empty State (hidden by default) -->
+        <div class="empty-state" id="searchEmptyState" style="display: none;">
+          <div class="empty-state-icon">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="8" y1="15" x2="16" y2="15"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/></svg>
+          </div>
+          <h3 id="emptyStateTitle">No Classrooms Available</h3>
+          <p id="emptyStateMessage">Every classroom on this floor is currently occupied or scheduled during the requested time slot. Try selecting a different hour or floor.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section: Interactive Building Overview & Floor Details -->
+  <section class="building-section" id="building-section">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">Interactive Directory</span>
+        <h2 class="section-title">Explore Building Floors</h2>
+        <p class="section-subtitle">
+          Select any floor from the building directory below to inspect room statuses, active lectures, and next available periods.
+        </p>
+      </div>
+
+      <div class="building-directory-wrap">
+        <!-- Left: Interactive Building Stack Directory (Floor 9 down to Floor 1) -->
+        <div class="building-stack">
+          <div class="stack-masthead">
+            <span class="masthead-title">Building Floors Directory</span>
+            <span class="masthead-badge" id="buildingLevelsBadge">9 Levels</span>
+          </div>
+
+          <div id="floorStackList">
+            <!-- Floor items populated via JS from top floor to 1 -->
+          </div>
+        </div>
+
+        <!-- Right: Dedicated Floor Details View -->
+        <div class="floor-view-panel">
+          <div class="floor-view-header">
+            <div>
+              <span class="logo-badge" id="selectedFloorBadge">Floor 1 Selected</span>
+              <h3 class="floor-view-title" id="selectedFloorTitle" style="margin-top: 6px;">Foundation &amp; Applied Sciences</h3>
+              <p class="floor-view-desc" id="selectedFloorDesc">First-year general classrooms, Physics and Chemistry lecture halls</p>
+            </div>
+
+            <div class="floor-status-summary">
+              <span class="status-badge status-available" id="floorCountAvail">-- Available</span>
+              <span class="status-badge status-occupied" id="floorCountOcc">-- Occupied</span>
+            </div>
+          </div>
+
+          <!-- Room Cards Grid for Selected Floor -->
+          <div class="results-grid" id="floorRoomsGrid">
+            <!-- Room cards for floor rendered here -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- About / Campus Problem & Viva Context Section -->
+  <section class="container" id="about-section" style="padding: 48px 20px 24px;">
+    <div class="about-card">
+      <div style="max-width: 850px;">
+        <span class="section-tag">Viva &amp; Architecture Overview</span>
+        <h2 style="font-size: 1.6rem; font-weight: 800; color: var(--primary-900); margin: 8px 0 16px;">
+          How Roomwise Determines Classroom Availability
+        </h2>
+        <p style="color: var(--text-muted); font-size: 0.95rem; line-height: 1.7; margin-bottom: 16px;">
+          In a large college building with 9 floors and over 140 classrooms, students and faculty often waste valuable break periods physically searching for empty rooms for study circles, placement preparation, or makeup classes.
+        </p>
+        <p style="color: var(--text-muted); font-size: 0.95rem; line-height: 1.7;">
+          <strong>Core C++ Scheduling Engine:</strong> Roomwise runs a deterministic interval intersection algorithm in C++. Operating hours (08:00 to 18:00) are converted to 24-hour minutes after midnight. A classroom is verified as <em>Occupied</em> if and only if a scheduled class overlaps the requested interval (<code style="background: var(--primary-50); color: var(--primary-800); padding: 2px 6px; border-radius: 4px;">start_A &lt; end_B &amp;&amp; end_A &gt; start_B</code>). Adjacent classes (e.g. 10:00 to 11:00 and 11:00 to 12:00) produce no conflict. Classrooms lacking verified schedule coverage are explicitly classified as <em>Unavailable</em> rather than falsely reported empty.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Room Details Modal Popup -->
+  <div class="modal-overlay" id="roomModalOverlay" onclick="if (event.target === this) window.RoomwiseApp.closeModal();">
+    <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="modalRoomTitle">
+      <div class="modal-header">
+        <div>
+          <span class="logo-badge" id="modalRoomType">Smart Classroom</span>
+          <h3 class="modal-title" id="modalRoomTitle" style="margin-top: 4px;">Classroom 101 — Schedule</h3>
+        </div>
+        <button type="button" class="modal-close-btn" aria-label="Close modal" onclick="window.RoomwiseApp.closeModal()">&times;</button>
+      </div>
+
+      <div class="modal-body">
+        <div class="modal-meta-row">
+          <span id="modalRoomLocation">Floor 1 · Capacity 60 Students</span>
+          <span id="modalDateDay" style="font-weight: 700; color: var(--primary-900);">Today</span>
+        </div>
+
+        <div id="modalTimelineTitle" style="font-size: 0.85rem; font-weight: 700; color: var(--primary-900); margin-top: 14px;">Daily Timeline Visualization (08:00 to 18:00)</div>
+        <div class="timeline-bar" id="modalTimelineBar"></div>
+        <div class="timeline-labels" id="modalTimelineLabels">
+          <span>08:00 AM</span>
+          <span>11:00 AM</span>
+          <span>02:00 PM</span>
+          <span>06:00 PM</span>
+        </div>
+
+        <div style="font-size: 0.9rem; font-weight: 700; color: var(--primary-900); margin-bottom: 8px;">
+          Slots &amp; Scheduled Classes
+        </div>
+        <div style="max-height: 260px; overflow-y: auto; overflow-x: auto;">
+          <table class="schedule-table">
+            <thead>
+              <tr>
+                <th>Time Slot</th>
+                <th>Status</th>
+                <th>Section</th>
+                <th>Subject / Details</th>
+              </tr>
+            </thead>
+            <tbody id="modalScheduleTableBody"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary btn-sm" onclick="window.RoomwiseApp.closeModal()">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Notification Container -->
+  <div class="toast-container" id="toastContainer"></div>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <h4>Roomwise — Empty Classroom Finder</h4>
+          <p>
+            An institutional utility engineered for campus efficiency. Empowers university students and faculty to locate unoccupied study spaces and track room allocations in real time.
+          </p>
+          <div style="margin-top: 14px; font-size: 0.8rem; color: var(--text-light);">
+            Built with C++17 Scheduling Engine, Persistent JSON Storage &amp; Vanilla JavaScript.
+          </div>
+        </div>
+
+        <div class="footer-links">
+          <h5>Building Navigation</h5>
+          <ul>
+            <li><a href="#hero">Overview</a></li>
+            <li><a href="#building-section">Floor Directory</a></li>
+            <li><a href="#search-section">Interval Availability Search</a></li>
+            <li><a href="#about-section">Architecture &amp; Rules</a></li>
+            <li><a href="/admin">Administrator Portal</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-links">
+          <h5>System Information</h5>
+          <ul>
+            <li><span style="font-size: 0.85rem; color: var(--text-muted);" id="footerCollege">Apex Institute</span></li>
+            <li><span style="font-size: 0.85rem; color: var(--text-muted);" id="footerBuilding">Academic Block</span></li>
+            <li><span style="font-size: 0.85rem; color: var(--text-muted);" id="footerFloors">9 Configured Floors</span></li>
+            <li><span style="font-size: 0.85rem; color: var(--text-muted);" id="footerHours">Operating Hours: 08:00 - 18:00</span></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <div>
+          &copy; 2026 Roomwise Project. Designed for B.Tech CSE Submission &amp; Demonstration.
+        </div>
+        <div>
+          Notice: Classroom availability depends strictly on verified institutional timetables.
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Runtime API Config & Public Frontend Script -->
+  <script src="config.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

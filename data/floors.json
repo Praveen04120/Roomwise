@@ -1,0 +1,47 @@
+[
+    {
+        "description": "First-year general classrooms, Physics and Chemistry lecture halls",
+        "floor_name": "Floor 1 - Foundation & Applied Sciences",
+        "floor_number": 1
+    },
+    {
+        "description": "Core programming labs, Data Structures and Algorithms lecture rooms",
+        "floor_name": "Floor 2 - Computer Science Core Block",
+        "floor_number": 2
+    },
+    {
+        "description": "Database management, Web Technologies and Object-Oriented design studios",
+        "floor_name": "Floor 3 - Software Engineering & Databases",
+        "floor_number": 3
+    },
+    {
+        "description": "Operating Systems, Computer Networks and Microprocessor research halls",
+        "floor_name": "Floor 4 - Systems & Networking Wing",
+        "floor_number": 4
+    },
+    {
+        "description": "Machine Learning, Artificial Intelligence and Big Data Analytics labs",
+        "floor_name": "Floor 5 - AI & Data Science Center",
+        "floor_number": 5
+    },
+    {
+        "description": "Cryptography, Cloud Computing and Information Security seminar rooms",
+        "floor_name": "Floor 6 - Cyber Security & Cloud Wing",
+        "floor_number": 6
+    },
+    {
+        "description": "Compiler Design, Distributed Systems and Honors elective classrooms",
+        "floor_name": "Floor 7 - Advanced Computing & Honors",
+        "floor_number": 7
+    },
+    {
+        "description": "M.Tech lecture theatres, faculty research cubicles and conference rooms",
+        "floor_name": "Floor 8 - Post Graduate & Research Wing",
+        "floor_number": 8
+    },
+    {
+        "description": "Project incubation suites, multipurpose auditoriums and hackathon halls",
+        "floor_name": "Floor 9 - Innovation & Seminar Theatres",
+        "floor_number": 9
+    }
+]

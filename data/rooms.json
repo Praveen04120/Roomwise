@@ -1,0 +1,1010 @@
+[
+    {
+        "capacity": 75,
+        "floor_number": 1,
+        "is_active": true,
+        "room_number": "101",
+        "room_type": "Smart Lecture Hall"
+    },
+    {
+        "capacity": 75,
+        "floor_number": 1,
+        "is_active": true,
+        "room_number": "102",
+        "room_type": "Smart Lecture Hall"
+    },
+    {
+        "capacity": 75,
+        "floor_number": 1,
+        "is_active": true,
+        "room_number": "103",
+        "room_type": "Standard Classroom"
+    },
+    {
+        "capacity": 75,
+        "floor_number": 1,
+        "is_active": true,
+        "room_number": "104",
+        "room_type": "Standard Classroom"
+    },
+    {
+        "capacity": 60,
+        "floor_number": 1,
+        "is_active": true,
+        "room_number": "105",
+        "room_type": "Standard Classroom"
+    },
+    {
+        "capacity": 60,
+        "floor_number": 1,
+        "is_active": true,
+        "room_number": "106",
+        "room_type": "Standard Classroom"
+    },
+    {
+        "capacity": 60,
+        "floor_number": 1,
+        "is_active": true,
+        "room_number": "107",
+        "room_type": "Computing Laboratory"
+    },
+    {
+        "capacity": 60,
+        "floor_number": 1,
+        "is_active": true,
+        "room_number": "108",
+        "room_type": "Computing Laboratory"
+    },
+    {
+        "capacity": 60,
+        "floor_number": 1,
+        "is_active": true,
+        "room_number": "109",
+        "room_type": "Standard Classroom"
+    },
+    {
+        "capacity": 60,
+        "floor_number": 1,
+        "is_active": true,
+        "room_number": "110",
+        "room_type": "Standard Classroom"
+    },
+    {
+        "capacity": 60,
+        "floor_number": 1,
+        "is_active": true,
+        "room_number": "111",
+        "room_type": "Standard Classroom"
+    },
+    {
+        "capacity": 60,
+        "floor_number": 1,
+        "is_active": true,
+        "room_number": "112",
+        "room_type": "Standard Classroom"
+    },
+    {
+        "capacity": 45,
+        "floor_number": 1,
+        "is_active": true,
+        "room_number": "113",
+        "room_type": "Standard Classroom"
+    },
+    {
+        "capacity": 45,
+        "floor_number": 1,
+        "is_active": true,
+        "room_number": "114",
+        "room_type": "Standard Classroom"
+    },
+    {
+        "capacity": 45,
+        "floor_number": 1,
+        "is_active": true,
+        "room_number": "115",
+        "room_type": "Seminar & Tutorial Room"
+    },
+    {
+        "capacity": 45,
+        "floor_number": 1,
+        "is_active": true,
+        "room_number": "116",
+        "room_type": "Seminar & Tutorial Room"
+    },
+    {
+        "capacity": 75,
+        "floor_number": 2,
+        "is_active": true,
+        "room_number": "201",
+        "room_type": "Smart Lecture Hall"
+    },
+    {
+        "capacity": 75,
+        "floor_number": 2,
+        "is_active": true,
+        "room_number": "202",
+        "room_type": "Smart Lecture Hall"
+    },
+    {
+        "capacity": 75,
+        "floor_number": 2,
+        "is_active": true,
+        "room_number": "203",
+        "room_type": "Standard Classroom"
+    },
+    {
+        "capacity": 75,
+        "floor_number": 2,
+        "is_active": true,
+        "room_number": "204",
+        "room_type": "Standard Classroom"
+    },
+    {
+        "capacity": 60,
+        "floor_number": 2,
+        "is_active": true,
+        "room_number": "205",
+        "room_type": "Standard Classroom"
+    },
+    {
+        "capacity": 60,
+        "floor_number": 2,
+        "is_active": true,
+        "room_number": "206",
+        "room_type": "Standard Classroom"
+    },
+    {
+        "capacity": 60,
+        "floor_number": 2,
+        "is_active": true,
+        "room_number": "207",
+        "room_type": "Computing Laboratory"
+    },
+    {
+        "capacity": 60,
+        "floor_number": 2,
+        "is_active": true,
+        "room_number": "208",
+        "room_type": "Computing Laboratory"
+    },
+    {
+        "capacity": 60,
+        "floor_number": 2,
+        "is_active": true,
+        "room_number": "209",
+        "room_type": "Standard Classroom"
+    },
+    {
+        "capacity": 60,
+        "floor_number": 2,
+        "is_active": true,
+        "room_number": "210",
+        "room_type": "Standard Classroom"
+    },
+    {
+        "capacity": 60,
+        "floor_number": 2,
+        "is_active": true,
+        "room_number": "211",
+        "room_type": "Standard Classroom"
+    },
+    {
+        "capacity": 60,
+        "floor_number": 2,
+        "is_active": true,
+        "room_number": "212",
+        "room_type": "Standard Classroom"
+    },
+    {
+        "capacity": 45,
+        "floor_number": 2,
+        "is_active": true,
+        "room_number": "213",
+        "room_type": "Standard Classroom"
+    },
+    {
+        "capacity": 45,
+        "floor_number": 2,
+        "is_active": true,
+        "room_number": "214",
+        "room_type": "Standard Classroom"
+    },
+    {
+        "capacity": 45,
+        "floor_number": 2,
+        "is_active": true,
+        "room_number": "215",
+        "room_type": "Seminar & Tutorial Room"
+    },
+    {
+        "capacity": 45,
+        "floor_number": 2,
+        "is_active": true,
+        "room_number": "216",
+        "room_type": "Seminar & Tutorial Room"
+    },
+    {
+        "capacity": 75,
+        "floor_number": 3,
+        "is_active": true,
+        "room_number": "301",
+        "room_type": "Smart Lecture Hall"
+    },
+    {
+        "capacity": 75,
+        "floor_number": 3,
+        "is_active": true,
+        "room_number": "302",
+        "room_type": "Smart Lecture Hall"
+    },
+    {
+        "capacity": 75,
+        "floor_number": 3,
+        "is_active": true,
+        "room_number": "303",
+        "room_type": "Standard Classroom"
+    },
+    {
+        "capacity": 75,
+        "floor_number": 3,
+        "is_active": true,
+        "room_number": "304",
+        "room_type": "Standard Classroom"
+    },
+    {
+        "capacity": 60,
+        "floor_number": 3,
+        "is_active": true,
+        "room_number": "305",
+        "room_type": "Standard Classroom"
+    },
+    {
+        "capacity": 60,
+        "floor_number": 3,
+        "is_active": true,
+        "room_number": "306",
+        "room_type": "Standard Classroom"
+    },
+    {
+        "capacity": 60,
+        "floor_number": 3,
+        "is_active": true,
+        "room_number": "307",
+        "room_type": "Computing Laboratory"
+    },
+    {
+        "capacity": 60,
+        "floor_number": 3,
+        "is_active": true,
+        "room_number": "308",
+        "room_type": "Computing Laboratory"
+    },
+    {
+        "capacity": 60,
+        "floor_number": 3,
+        "is_active": true,
+        "room_number": "309",
+        "room_type": "Standard Classroom"
+    },
+    {
+        "capacity": 60,
+        "floor_number": 3,
+        "is_active": true,
+        "room_number": "310",
+        "room_type": "Standard Classroom"
+    },
+    {
+        "capacity": 60,
+        "floor_number": 3,
+        "is_active": true,
+        "room_number": "311",
+        "room_type": "Standard Classroom"
+    },
+    {
+        "capacity": 60,
+        "floor_number": 3,
+        "is_active": true,
+        "room_number": "312",
+        "room_type": "Standard Classroom"
+    },
+    {
+        "capacity": 45,
+        "floor_number": 3,
+        "is_active": true,
+        "room_number": "313",
+        "room_type": "Standard Classroom"
+    },
+    {
+        "capacity": 45,
+        "floor_number": 3,
+        "is_active": true,
+        "room_number": "314",
+        "room_type": "Standard Classroom"
+    },
+    {
+        "capacity": 45,
+        "floor_number": 3,
+        "is_active": true,
+        "room_number": "315",
+        "room_type": "Seminar & Tutorial Room"
+    },
+    {
+        "capacity": 45,
+        "floor_number": 3,
+        "is_active": true,
+        "room_number": "316",
+        "room_type": "Seminar & Tutorial Room"
+    },
+    {
+        "capacity": 75,
+        "floor_number": 4,
+        "is_active": true,
+        "room_number": "401",
+        "room_type": "Smart Lecture Hall"
+    },
+    {
+        "capacity": 75,
+        "floor_number": 4,
+        "is_active": true,
+        "room_number": "402",
+        "room_type": "Smart Lecture Hall"
+    },
+    {
+        "capacity": 75,
+        "floor_number": 4,
+        "is_active": true,
+        "room_number": "403",
+        "room_type": "Standard Classroom"
+    },
+    {
+        "capacity": 75,
+        "floor_number": 4,
+        "is_active": true,
+        "room_number": "404",
+        "room_type": "Standard Classroom"
+    },
+    {
+        "capacity": 60,
+        "floor_number": 4,
+        "is_active": true,
+        "room_number": "405",
+        "room_type": "Standard Classroom"
+    },
+    {
+        "capacity": 60,
+        "floor_number": 4,
+        "is_active": true,
+        "room_number": "406",
+        "room_type": "Standard Classroom"
+    },
+    {
+        "capacity": 60,
+        "floor_number": 4,
+        "is_active": true,
+        "room_number": "407",
+        "room_type": "Computing Laboratory"
+    },
+    {
+        "capacity": 60,
+        "floor_number": 4,
+        "is_active": true,
+        "room_number": "408",
+        "room_type": "Computing Laboratory"
+    },
+    {
+        "capacity": 60,
+        "floor_number": 4,
+        "is_active": true,
+        "room_number": "409",
+        "room_type": "Standard Classroom"
+    },
+    {
+        "capacity": 60,
+        "floor_number": 4,
+        "is_active": true,
+        "room_number": "410",
+        "room_type": "Standard Classroom"
+    },
+    {
+        "capacity": 60,
+        "floor_number": 4,
+        "is_active": true,
+        "room_number": "411",
+        "room_type": "Standard Classroom"
+    },
+    {
+        "capacity": 60,
+        "floor_number": 4,
+        "is_active": true,
+        "room_number": "412",
+        "room_type": "Standard Classroom"
+    },
+    {
+        "capacity": 45,
+        "floor_number": 4,
+        "is_active": true,
+        "room_number": "413",
+        "room_type": "Standard Classroom"
+    },
+    {
+        "capacity": 45,
+        "floor_number": 4,
+        "is_active": true,
+        "room_number": "414",
+        "room_type": "Standard Classroom"
+    },
+    {
+        "capacity": 45,
+        "floor_number": 4,
+        "is_active": true,
+        "room_number": "415",
+        "room_type": "Seminar & Tutorial Room"
+    },
+    {
+        "capacity": 45,
+        "floor_number": 4,
+        "is_active": true,
+        "room_number": "416",
+        "room_type": "Seminar & Tutorial Room"
+    },
+    {
+        "capacity": 75,
+        "floor_number": 5,
+        "is_active": true,
+        "room_number": "501",
+        "room_type": "Smart Lecture Hall"
+    },
+    {
+        "capacity": 75,
+        "floor_number": 5,
+        "is_active": true,
+        "room_number": "502",
+        "room_type": "Smart Lecture Hall"
+    },
+    {
+        "capacity": 75,
+        "floor_number": 5,
+        "is_active": true,
+        "room_number": "503",
+        "room_type": "Standard Classroom"
+    },
+    {
+        "capacity": 75,
+        "floor_number": 5,
+        "is_active": true,
+        "room_number": "504",
+        "room_type": "Standard Classroom"
+    },
+    {
+        "capacity": 60,
+        "floor_number": 5,
+        "is_active": true,
+        "room_number": "505",
+        "room_type": "Standard Classroom"
+    },
+    {
+        "capacity": 60,
+        "floor_number": 5,
+        "is_active": true,
+        "room_number": "506",
+        "room_type": "Standard Classroom"
+    },
+    {
+        "capacity": 60,
+        "floor_number": 5,
+        "is_active": true,
+        "room_number": "507",
+        "room_type": "Computing Laboratory"
+    },
+    {
+        "capacity": 60,
+        "floor_number": 5,
+        "is_active": true,
+        "room_number": "508",
+        "room_type": "Computing Laboratory"
+    },
+    {
+        "capacity": 60,
+        "floor_number": 5,
+        "is_active": true,
+        "room_number": "509",
+        "room_type": "Standard Classroom"
+    },
+    {
+        "capacity": 60,
+        "floor_number": 5,
+        "is_active": true,
+        "room_number": "510",
+        "room_type": "Standard Classroom"
+    },
+    {
+        "capacity": 60,
+        "floor_number": 5,
+        "is_active": true,
+        "room_number": "511",
+        "room_type": "Standard Classroom"
+    },
+    {
+        "capacity": 60,
+        "floor_number": 5,
+        "is_active": true,
+        "room_number": "512",
+        "room_type": "Standard Classroom"
+    },
+    {
+        "capacity": 45,
+        "floor_number": 5,
+        "is_active": true,
+        "room_number": "513",
+        "room_type": "Standard Classroom"
+    },
+    {
+        "capacity": 45,
+        "floor_number": 5,
+        "is_active": true,
+        "room_number": "514",
+        "room_type": "Standard Classroom"
+    },
+    {
+        "capacity": 45,
+        "floor_number": 5,
+        "is_active": true,
+        "room_number": "515",
+        "room_type": "Seminar & Tutorial Room"
+    },
+    {
+        "capacity": 45,
+        "floor_number": 5,
+        "is_active": true,
+        "room_number": "516",
+        "room_type": "Seminar & Tutorial Room"
+    },
+    {
+        "capacity": 75,
+        "floor_number": 6,
+        "is_active": true,
+        "room_number": "601",
+        "room_type": "Smart Lecture Hall"
+    },
+    {
+        "capacity": 75,
+        "floor_number": 6,
+        "is_active": true,
+        "room_number": "602",
+        "room_type": "Smart Lecture Hall"
+    },
+    {
+        "capacity": 75,
+        "floor_number": 6,
+        "is_active": true,
+        "room_number": "603",
+        "room_type": "Standard Classroom"
+    },
+    {
+        "capacity": 75,
+        "floor_number": 6,
+        "is_active": true,
+        "room_number": "604",
+        "room_type": "Standard Classroom"
+    },
+    {
+        "capacity": 60,
+        "floor_number": 6,
+        "is_active": true,
+        "room_number": "605",
+        "room_type": "Standard Classroom"
+    },
+    {
+        "capacity": 60,
+        "floor_number": 6,
+        "is_active": true,
+        "room_number": "606",
+        "room_type": "Standard Classroom"
+    },
+    {
+        "capacity": 60,
+        "floor_number": 6,
+        "is_active": true,
+        "room_number": "607",
+        "room_type": "Computing Laboratory"
+    },
+    {
+        "capacity": 60,
+        "floor_number": 6,
+        "is_active": true,
+        "room_number": "608",
+        "room_type": "Computing Laboratory"
+    },
+    {
+        "capacity": 60,
+        "floor_number": 6,
+        "is_active": true,
+        "room_number": "609",
+        "room_type": "Standard Classroom"
+    },
+    {
+        "capacity": 60,
+        "floor_number": 6,
+        "is_active": true,
+        "room_number": "610",
+        "room_type": "Standard Classroom"
+    },
+    {
+        "capacity": 60,
+        "floor_number": 6,
+        "is_active": true,
+        "room_number": "611",
+        "room_type": "Standard Classroom"
+    },
+    {
+        "capacity": 60,
+        "floor_number": 6,
+        "is_active": true,
+        "room_number": "612",
+        "room_type": "Standard Classroom"
+    },
+    {
+        "capacity": 45,
+        "floor_number": 6,
+        "is_active": true,
+        "room_number": "613",
+        "room_type": "Standard Classroom"
+    },
+    {
+        "capacity": 45,
+        "floor_number": 6,
+        "is_active": true,
+        "room_number": "614",
+        "room_type": "Standard Classroom"
+    },
+    {
+        "capacity": 45,
+        "floor_number": 6,
+        "is_active": true,
+        "room_number": "615",
+        "room_type": "Seminar & Tutorial Room"
+    },
+    {
+        "capacity": 45,
+        "floor_number": 6,
+        "is_active": true,
+        "room_number": "616",
+        "room_type": "Seminar & Tutorial Room"
+    },
+    {
+        "capacity": 75,
+        "floor_number": 7,
+        "is_active": true,
+        "room_number": "701",
+        "room_type": "Smart Lecture Hall"
+    },
+    {
+        "capacity": 75,
+        "floor_number": 7,
+        "is_active": true,
+        "room_number": "702",
+        "room_type": "Smart Lecture Hall"
+    },
+    {
+        "capacity": 75,
+        "floor_number": 7,
+        "is_active": true,
+        "room_number": "703",
+        "room_type": "Standard Classroom"
+    },
+    {
+        "capacity": 75,
+        "floor_number": 7,
+        "is_active": true,
+        "room_number": "704",
+        "room_type": "Standard Classroom"
+    },
+    {
+        "capacity": 60,
+        "floor_number": 7,
+        "is_active": true,
+        "room_number": "705",
+        "room_type": "Standard Classroom"
+    },
+    {
+        "capacity": 60,
+        "floor_number": 7,
+        "is_active": true,
+        "room_number": "706",
+        "room_type": "Standard Classroom"
+    },
+    {
+        "capacity": 60,
+        "floor_number": 7,
+        "is_active": true,
+        "room_number": "707",
+        "room_type": "Computing Laboratory"
+    },
+    {
+        "capacity": 60,
+        "floor_number": 7,
+        "is_active": true,
+        "room_number": "708",
+        "room_type": "Computing Laboratory"
+    },
+    {
+        "capacity": 60,
+        "floor_number": 7,
+        "is_active": true,
+        "room_number": "709",
+        "room_type": "Standard Classroom"
+    },
+    {
+        "capacity": 60,
+        "floor_number": 7,
+        "is_active": true,
+        "room_number": "710",
+        "room_type": "Standard Classroom"
+    },
+    {
+        "capacity": 60,
+        "floor_number": 7,
+        "is_active": true,
+        "room_number": "711",
+        "room_type": "Standard Classroom"
+    },
+    {
+        "capacity": 60,
+        "floor_number": 7,
+        "is_active": true,
+        "room_number": "712",
+        "room_type": "Standard Classroom"
+    },
+    {
+        "capacity": 45,
+        "floor_number": 7,
+        "is_active": true,
+        "room_number": "713",
+        "room_type": "Standard Classroom"
+    },
+    {
+        "capacity": 45,
+        "floor_number": 7,
+        "is_active": true,
+        "room_number": "714",
+        "room_type": "Standard Classroom"
+    },
+    {
+        "capacity": 45,
+        "floor_number": 7,
+        "is_active": true,
+        "room_number": "715",
+        "room_type": "Seminar & Tutorial Room"
+    },
+    {
+        "capacity": 45,
+        "floor_number": 7,
+        "is_active": true,
+        "room_number": "716",
+        "room_type": "Seminar & Tutorial Room"
+    },
+    {
+        "capacity": 75,
+        "floor_number": 8,
+        "is_active": true,
+        "room_number": "801",
+        "room_type": "Smart Lecture Hall"
+    },
+    {
+        "capacity": 75,
+        "floor_number": 8,
+        "is_active": true,
+        "room_number": "802",
+        "room_type": "Smart Lecture Hall"
+    },
+    {
+        "capacity": 75,
+        "floor_number": 8,
+        "is_active": true,
+        "room_number": "803",
+        "room_type": "Standard Classroom"
+    },
+    {
+        "capacity": 75,
+        "floor_number": 8,
+        "is_active": true,
+        "room_number": "804",
+        "room_type": "Standard Classroom"
+    },
+    {
+        "capacity": 60,
+        "floor_number": 8,
+        "is_active": true,
+        "room_number": "805",
+        "room_type": "Standard Classroom"
+    },
+    {
+        "capacity": 60,
+        "floor_number": 8,
+        "is_active": true,
+        "room_number": "806",
+        "room_type": "Standard Classroom"
+    },
+    {
+        "capacity": 60,
+        "floor_number": 8,
+        "is_active": true,
+        "room_number": "807",
+        "room_type": "Computing Laboratory"
+    },
+    {
+        "capacity": 60,
+        "floor_number": 8,
+        "is_active": true,
+        "room_number": "808",
+        "room_type": "Computing Laboratory"
+    },
+    {
+        "capacity": 60,
+        "floor_number": 8,
+        "is_active": true,
+        "room_number": "809",
+        "room_type": "Standard Classroom"
+    },
+    {
+        "capacity": 60,
+        "floor_number": 8,
+        "is_active": true,
+        "room_number": "810",
+        "room_type": "Standard Classroom"
+    },
+    {
+        "capacity": 60,
+        "floor_number": 8,
+        "is_active": true,
+        "room_number": "811",
+        "room_type": "Standard Classroom"
+    },
+    {
+        "capacity": 60,
+        "floor_number": 8,
+        "is_active": true,
+        "room_number": "812",
+        "room_type": "Standard Classroom"
+    },
+    {
+        "capacity": 45,
+        "floor_number": 8,
+        "is_active": true,
+        "room_number": "813",
+        "room_type": "Standard Classroom"
+    },
+    {
+        "capacity": 45,
+        "floor_number": 8,
+        "is_active": true,
+        "room_number": "814",
+        "room_type": "Standard Classroom"
+    },
+    {
+        "capacity": 45,
+        "floor_number": 8,
+        "is_active": true,
+        "room_number": "815",
+        "room_type": "Seminar & Tutorial Room"
+    },
+    {
+        "capacity": 45,
+        "floor_number": 8,
+        "is_active": true,
+        "room_number": "816",
+        "room_type": "Seminar & Tutorial Room"
+    },
+    {
+        "capacity": 75,
+        "floor_number": 9,
+        "is_active": true,
+        "room_number": "901",
+        "room_type": "Smart Lecture Hall"
+    },
+    {
+        "capacity": 75,
+        "floor_number": 9,
+        "is_active": true,
+        "room_number": "902",
+        "room_type": "Smart Lecture Hall"
+    },
+    {
+        "capacity": 75,
+        "floor_number": 9,
+        "is_active": true,
+        "room_number": "903",
+        "room_type": "Standard Classroom"
+    },
+    {
+        "capacity": 75,
+        "floor_number": 9,
+        "is_active": true,
+        "room_number": "904",
+        "room_type": "Standard Classroom"
+    },
+    {
+        "capacity": 60,
+        "floor_number": 9,
+        "is_active": true,
+        "room_number": "905",
+        "room_type": "Standard Classroom"
+    },
+    {
+        "capacity": 60,
+        "floor_number": 9,
+        "is_active": true,
+        "room_number": "906",
+        "room_type": "Standard Classroom"
+    },
+    {
+        "capacity": 60,
+        "floor_number": 9,
+        "is_active": true,
+        "room_number": "907",
+        "room_type": "Computing Laboratory"
+    },
+    {
+        "capacity": 60,
+        "floor_number": 9,
+        "is_active": true,
+        "room_number": "908",
+        "room_type": "Computing Laboratory"
+    },
+    {
+        "capacity": 60,
+        "floor_number": 9,
+        "is_active": true,
+        "room_number": "909",
+        "room_type": "Standard Classroom"
+    },
+    {
+        "capacity": 60,
+        "floor_number": 9,
+        "is_active": true,
+        "room_number": "910",
+        "room_type": "Standard Classroom"
+    },
+    {
+        "capacity": 60,
+        "floor_number": 9,
+        "is_active": true,
+        "room_number": "911",
+        "room_type": "Standard Classroom"
+    },
+    {
+        "capacity": 60,
+        "floor_number": 9,
+        "is_active": true,
+        "room_number": "912",
+        "room_type": "Standard Classroom"
+    },
+    {
+        "capacity": 45,
+        "floor_number": 9,
+        "is_active": true,
+        "room_number": "913",
+        "room_type": "Standard Classroom"
+    },
+    {
+        "capacity": 45,
+        "floor_number": 9,
+        "is_active": true,
+        "room_number": "914",
+        "room_type": "Standard Classroom"
+    },
+    {
+        "capacity": 45,
+        "floor_number": 9,
+        "is_active": true,
+        "room_number": "915",
+        "room_type": "Seminar & Tutorial Room"
+    },
+    {
+        "capacity": 45,
+        "floor_number": 9,
+        "is_active": true,
+        "room_number": "916",
+        "room_type": "Seminar & Tutorial Room"
+    }
+]

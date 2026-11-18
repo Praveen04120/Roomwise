@@ -1,0 +1,15 @@
+{
+  "name": "roomwise",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Roomwise — Empty Classroom Finder (C++17 Scheduling Engine + Web Portal)",
+  "scripts": {
+    "build": "node scripts/vercel-build.js"
+  },
+  "dependencies": {
+    "@vercel/blob": "^2.0.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}

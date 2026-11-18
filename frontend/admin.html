@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Portal — Roomwise Classroom Management</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%231e3a8a'><path d='M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5'/></svg>">
+</head>
+<body style="background-color: var(--bg-page);">
+
+  <!-- Login Modal / Gate Screen -->
+  <div id="adminLoginScreen" style="position: fixed; inset: 0; background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 100%); z-index: 10000; display: flex; align-items: center; justify-content: center; padding: 20px;">
+    <div style="background: #ffffff; border-radius: var(--radius-xl); padding: 36px 28px; width: 100%; max-width: 440px; box-shadow: var(--shadow-xl); text-align: center;">
+      <div style="width: 56px; height: 56px; background: linear-gradient(135deg, var(--primary-900), var(--primary-600)); border-radius: var(--radius-md); display: flex; align-items: center; justify-content: center; margin: 0 auto 18px; color: #fff;">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+          <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+        </svg>
+      </div>
+
+      <h2 style="font-size: 1.5rem; font-weight: 800; color: var(--primary-900); margin-bottom: 6px;">Administrator Sign In</h2>
+      <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 24px;">
+        Institutional access for campus timetable and classroom space management.
+      </p>
+
+      <form id="adminLoginForm" onsubmit="event.preventDefault(); window.RoomwiseAdmin.login();">
+        <div class="form-group" style="text-align: left; margin-bottom: 18px;">
+          <label for="adminPasswordInput" style="font-size: 0.85rem; font-weight: 600;">Security Password</label>
+          <input type="password" id="adminPasswordInput" class="form-input" placeholder="Enter administrator password" autocomplete="current-password" required autofocus>
+        </div>
+
+        <button type="submit" class="btn btn-primary" id="btnAdminSignIn" style="width: 100%; height: 46px;">
+          Sign In to Dashboard
+        </button>
+      </form>
+
+      <div style="margin-top: 24px; padding-top: 16px; border-top: 1px solid var(--border-light); font-size: 0.85rem;">
+        <a href="/" style="color: var(--primary-700); text-decoration: none; font-weight: 600;">&larr; Return to Public Portal</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Authenticated Admin Interface -->
+  <div id="adminAppWrap" style="display: none;">
+    <!-- Admin Header -->
+    <header style="background: #ffffff; border-bottom: 1px solid var(--border-light); padding: 14px 0; position: sticky; top: 0; z-index: 100; box-shadow: var(--shadow-sm);">
+      <div class="container admin-header-inner">
+        <div style="display: flex; align-items: center; gap: 12px; min-width: 0;">
+          <div class="logo-icon" style="width: 38px; height: 38px; flex-shrink: 0;">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M3 21h18M5 21V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v16M9 9h1M9 13h1M9 17h1M14 9h1M14 13h1M14 17h1"/>
+            </svg>
+          </div>
+          <div style="min-width: 0;">
+            <div style="font-size: 1.15rem; font-weight: 800; color: var(--primary-900); display: flex; align-items: center; gap: 6px; flex-wrap: wrap;">
+              Roomwise <span class="logo-badge" style="background: var(--accent-pink-soft); color: var(--accent-pink); border-color: #fbcfe8;">Admin</span>
+            </div>
+            <div style="font-size: 0.75rem; color: var(--text-muted); overflow: hidden; text-overflow: ellipsis; white-space: nowrap;" id="adminCampusHeader">Academic Block Administration</div>
+          </div>
+        </div>
+
+        <div class="admin-header-actions">
+          <a href="/" class="btn btn-secondary btn-sm" target="_blank" rel="noopener">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+            Public View
+          </a>
+          <button type="button" class="btn btn-secondary btn-sm" id="btnAdminLogout" onclick="window.RoomwiseAdmin.logout()" style="color: var(--status-occ);">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+            Logout
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <!-- Main Content Area with Navigation Tabs -->
+    <main class="container" style="padding: 24px 20px 60px;">
+      <!-- Tab Navigation -->
+      <nav class="admin-nav-tabs" aria-label="Admin sections">
+        <button type="button" class="admin-tab-btn active" data-tab="dashboard" onclick="window.RoomwiseAdmin.switchTab('dashboard')">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+          Dashboard
+        </button>
+        <button type="button" class="admin-tab-btn" data-tab="floors" onclick="window.RoomwiseAdmin.switchTab('floors')">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>
+          Manage Floors
+        </button>
+        <button type="button" class="admin-tab-btn" data-tab="rooms" onclick="window.RoomwiseAdmin.switchTab('rooms')">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 3v18M15 3v18"/></svg>
+          Manage Classrooms
+        </button>
+        <button type="button" class="admin-tab-btn" data-tab="upload" onclick="window.RoomwiseAdmin.switchTab('upload')">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+          Upload Timetable (CSV)
+        </button>
+        <button type="button" class="admin-tab-btn" data-tab="timetable" onclick="window.RoomwiseAdmin.switchTab('timetable')">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+          Manage Timetable
+        </button>
+        <button type="button" class="admin-tab-btn" data-tab="settings" onclick="window.RoomwiseAdmin.switchTab('settings')">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+          Settings
+        </button>
+      </nav>
+
+      <!-- TAB 1: DASHBOARD -->
+      <div id="tab-dashboard" class="admin-panel active">
+        <div class="summary-grid" style="margin-bottom: 28px;">
+          <div class="stat-card">
+            <div class="stat-icon icon-pink"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg></div>
+            <div class="stat-info">
+              <div class="stat-num" id="dashTotalFloors">--</div>
+              <div class="stat-label">Total Floors</div>
+            </div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon icon-blue"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/></svg></div>
+            <div class="stat-info">
+              <div class="stat-num" id="dashTotalRooms">--</div>
+              <div class="stat-label">Configured Classrooms</div>
+            </div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon icon-green"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></div>
+            <div class="stat-info">
+              <div class="stat-num" id="dashTotalEntries">--</div>
+              <div class="stat-label">Timetable Records</div>
+            </div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon icon-red"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
+            <div class="stat-info">
+              <div class="stat-num" id="dashUpcomingCount">--</div>
+              <div class="stat-label">Upcoming Lectures Today</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="admin-dash-grid">
+          <!-- Left: Upcoming Classes Table -->
+          <div style="background: #ffffff; border: 1px solid var(--border-light); border-radius: var(--radius-xl); padding: 24px; box-shadow: var(--shadow-sm); min-width: 0;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; flex-wrap: wrap; gap: 10px;">
+              <h3 style="font-size: 1.15rem; font-weight: 800; color: var(--primary-900);">Upcoming Classes Today (<span id="dashTodayDay">Today</span>)</h3>
+              <button type="button" class="btn btn-secondary btn-sm" onclick="window.RoomwiseAdmin.switchTab('timetable')">View All Timetable</button>
+            </div>
+
+            <div class="data-table-wrap">
+              <table class="data-table">
+                <thead>
+                  <tr>
+                    <th>Room</th>
+                    <th>Time</th>
+                    <th>Section</th>
+                    <th>Subject</th>
+                  </tr>
+                </thead>
+                <tbody id="dashUpcomingTableBody"></tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- Right: Quick Actions -->
+          <div style="background: #ffffff; border: 1px solid var(--border-light); border-radius: var(--radius-xl); padding: 24px; box-shadow: var(--shadow-sm); display: flex; flex-direction: column; gap: 14px;">
+            <h3 style="font-size: 1.15rem; font-weight: 800; color: var(--primary-900);">Quick Administrative Actions</h3>
+            <button type="button" class="btn btn-primary" onclick="window.RoomwiseAdmin.switchTab('upload')">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+              Upload Timetable (CSV)
+            </button>
+            <button type="button" class="btn btn-secondary" onclick="window.RoomwiseAdmin.openAddRoomModal()">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+              Add New Classroom
+            </button>
+            <button type="button" class="btn btn-secondary" onclick="window.RoomwiseAdmin.openAddScheduleModal()">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+              Schedule Single Lecture
+            </button>
+            <a href="/sample_timetable.csv" id="sampleCsvLinkDash" class="btn btn-secondary" download style="text-decoration: none;">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+              Download Sample CSV Template
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- TAB 2: MANAGE FLOORS -->
+      <div id="tab-floors" class="admin-panel">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; flex-wrap: wrap; gap: 14px;">
+          <div>
+            <h3 style="font-size: 1.3rem; font-weight: 800; color: var(--primary-900);">Campus Floors</h3>
+            <p style="font-size: 0.85rem; color: var(--text-muted);">Configure building levels and academic wing descriptions.</p>
+          </div>
+          <button type="button" class="btn btn-primary" onclick="window.RoomwiseAdmin.openAddFloorModal()">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+            Add Floor
+          </button>
+        </div>
+
+        <div class="data-table-wrap">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th style="width: 90px;">Level</th>
+                <th>Floor Name</th>
+                <th>Description</th>
+                <th style="width: 140px;">Classrooms</th>
+                <th style="width: 150px;">Actions</th>
+              </tr>
+            </thead>
+            <tbody id="adminFloorsTableBody"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- TAB 3: MANAGE CLASSROOMS -->
+      <div id="tab-rooms" class="admin-panel">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; flex-wrap: wrap; gap: 14px;">
+          <div>
+            <h3 style="font-size: 1.3rem; font-weight: 800; color: var(--primary-900);">Classroom Inventory</h3>
+            <p style="font-size: 0.85rem; color: var(--text-muted);">Add, edit, or remove classrooms per floor. Prevents duplicate room numbers.</p>
+          </div>
+
+          <div style="display: flex; gap: 12px; align-items: center; flex-wrap: wrap;">
+            <select id="adminRoomFloorFilter" class="form-select" style="width: 180px; height: 38px;" onchange="window.RoomwiseAdmin.loadRoomsTable()">
+              <option value="0">All Floors</option>
+            </select>
+            <button type="button" class="btn btn-primary btn-sm" onclick="window.RoomwiseAdmin.openAddRoomModal()">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+              Add Classroom
+            </button>
+          </div>
+        </div>
+
+        <div class="data-table-wrap">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Room #</th>
+                <th>Floor</th>
+                <th>Type</th>
+                <th>Capacity</th>
+                <th>Timetable Status</th>
+                <th style="width: 150px;">Actions</th>
+              </tr>
+            </thead>
+            <tbody id="adminRoomsTableBody"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- TAB 4: UPLOAD TIMETABLE (CSV) -->
+      <div id="tab-upload" class="admin-panel">
+        <div style="background: #ffffff; border: 1px solid var(--border-light); border-radius: var(--radius-xl); padding: 28px; box-shadow: var(--shadow-sm); margin-bottom: 24px;">
+          <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 20px; flex-wrap: wrap; gap: 14px;">
+            <div>
+              <h3 style="font-size: 1.3rem; font-weight: 800; color: var(--primary-900);">Upload Timetable via CSV</h3>
+              <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 4px;">
+                Import schedule batches formatted from Excel or Google Sheets. Validates column headers, room numbers, time ranges, and detects schedule collisions.
+              </p>
+            </div>
+            <a href="/sample_timetable.csv" id="sampleCsvLinkUpload" class="btn btn-secondary btn-sm" download>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+              Download Sample CSV
+            </a>
+          </div>
+
+          <div style="background-color: var(--primary-50); border: 1px solid var(--primary-100); border-radius: var(--radius-md); padding: 14px 18px; margin-bottom: 24px; font-size: 0.85rem; overflow-x: auto;">
+            <strong>Expected Columns:</strong> <code style="color: var(--primary-900); font-weight: 700;">room_number,section,subject,day,start_time,end_time</code>
+            <br>
+            <span style="color: var(--text-muted);">Example: <code>101,CSCB,Data Structures,Monday,09:00,10:00</code></span>
+          </div>
+
+          <!-- File Upload and Paste Section -->
+          <div class="admin-upload-grid">
+            <!-- Option A: File Selector -->
+            <div style="border: 2px dashed var(--border-light); border-radius: var(--radius-lg); padding: 24px; text-align: center;">
+              <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" style="color: var(--primary-600); margin-bottom: 12px;"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+              <div style="font-weight: 700; color: var(--primary-900); margin-bottom: 6px;">Select CSV File</div>
+              <input type="file" id="csvFileInput" accept=".csv,text/csv" style="display: none;" onchange="window.RoomwiseAdmin.handleFileSelected(this.files)">
+              <button type="button" class="btn btn-secondary btn-sm" onclick="document.getElementById('csvFileInput').click()">Browse Computer</button>
+              <div id="selectedFileName" style="font-size: 0.8rem; color: var(--text-muted); margin-top: 8px;">No file chosen</div>
+            </div>
+
+            <!-- Option B: Direct CSV Paste -->
+            <div>
+              <label for="csvTextInput" style="font-size: 0.85rem; font-weight: 600; margin-bottom: 6px; display: block;">Or Paste CSV Content Here:</label>
+              <textarea id="csvTextInput" class="form-input" style="height: 130px; font-family: monospace; font-size: 0.8rem; padding: 10px;" placeholder="room_number,section,subject,day,start_time,end_time&#10;101,CSCB,Data Structures,Monday,09:00,10:00"></textarea>
+            </div>
+          </div>
+
+          <div style="display: flex; gap: 12px; align-items: center; flex-wrap: wrap;">
+            <button type="button" class="btn btn-primary" id="btnValidateCsv" onclick="window.RoomwiseAdmin.validateCSV()">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+              Validate &amp; Preview Rows
+            </button>
+            <button type="button" class="btn btn-secondary" onclick="window.RoomwiseAdmin.clearCSV()">Clear</button>
+          </div>
+        </div>
+
+        <!-- Validation & Preview Results Area (Hidden until validated) -->
+        <div id="csvValidationBox" style="display: none; background: #ffffff; border: 1px solid var(--border-light); border-radius: var(--radius-xl); padding: 28px; box-shadow: var(--shadow-sm);">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 18px; flex-wrap: wrap; gap: 12px;">
+            <div>
+              <h4 style="font-size: 1.15rem; font-weight: 800; color: var(--primary-900);">CSV Validation Summary</h4>
+              <p style="font-size: 0.85rem; color: var(--text-muted);">Review parsed rows before committing to persistent storage.</p>
+            </div>
+            <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+              <span class="status-badge status-available" id="csvValidBadge">0 Valid Rows</span>
+              <span class="status-badge status-occupied" id="csvInvalidBadge">0 Invalid Rows</span>
+            </div>
+          </div>
+
+          <div id="csvSummaryErrors" style="display: none; background: var(--status-occ-bg); border: 1px solid var(--status-occ-border); color: var(--status-occ-text); padding: 12px 16px; border-radius: var(--radius-md); margin-bottom: 16px; font-size: 0.85rem;"></div>
+
+          <!-- Preview Table -->
+          <div class="data-table-wrap" style="max-height: 360px; overflow-y: auto; margin-bottom: 24px;">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th style="width: 60px;">Row</th>
+                  <th>Status</th>
+                  <th>Room</th>
+                  <th>Day</th>
+                  <th>Time Slot</th>
+                  <th>Section</th>
+                  <th>Subject</th>
+                  <th>Validation Message</th>
+                </tr>
+              </thead>
+              <tbody id="csvPreviewTableBody"></tbody>
+            </table>
+          </div>
+
+          <!-- Import Scope Selection -->
+          <div style="background-color: var(--bg-page); border: 1px solid var(--border-light); border-radius: var(--radius-md); padding: 18px; margin-bottom: 24px;">
+            <div style="font-size: 0.9rem; font-weight: 700; color: var(--primary-900); margin-bottom: 10px;">Select Import Mode:</div>
+            <div class="admin-import-modes">
+              <label style="display: flex; align-items: flex-start; gap: 8px; cursor: pointer;">
+                <input type="radio" name="importModeRadio" value="append" checked style="margin-top: 3px;">
+                <span><strong>Append Entries:</strong> Add valid rows alongside existing timetable (skips conflicting entries).</span>
+              </label>
+              <label style="display: flex; align-items: flex-start; gap: 8px; cursor: pointer;">
+                <input type="radio" name="importModeRadio" value="replace" style="margin-top: 3px;">
+                <span><strong style="color: var(--status-occ);">Replace Entire Timetable:</strong> Overwrite all existing timetable records.</span>
+              </label>
+            </div>
+          </div>
+
+          <button type="button" class="btn btn-pink" id="btnConfirmImport" onclick="window.RoomwiseAdmin.commitImport()">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+            Confirm &amp; Import Valid Rows
+          </button>
+        </div>
+      </div>
+
+      <!-- TAB 5: MANAGE TIMETABLE (CRUD) -->
+      <div id="tab-timetable" class="admin-panel">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; flex-wrap: wrap; gap: 14px;">
+          <div>
+            <h3 style="font-size: 1.3rem; font-weight: 800; color: var(--primary-900);">Timetable Master Records</h3>
+            <p style="font-size: 0.85rem; color: var(--text-muted);">Search, manually add, edit, or delete individual recurring class schedules.</p>
+          </div>
+
+          <div style="display: flex; gap: 10px; align-items: center; flex-wrap: wrap;">
+            <input type="text" id="adminFilterRoom" class="form-input" placeholder="Filter Room (e.g. 101)" style="width: 150px; height: 38px;" oninput="window.RoomwiseAdmin.loadTimetableTable()">
+            <select id="adminFilterDay" class="form-select" style="width: 140px; height: 38px;" onchange="window.RoomwiseAdmin.loadTimetableTable()">
+              <option value="">All Days</option>
+              <option value="Monday">Monday</option>
+              <option value="Tuesday">Tuesday</option>
+              <option value="Wednesday">Wednesday</option>
+              <option value="Thursday">Thursday</option>
+              <option value="Friday">Friday</option>
+              <option value="Saturday">Saturday</option>
+              <option value="Sunday">Sunday</option>
+            </select>
+            <button type="button" class="btn btn-primary btn-sm" onclick="window.RoomwiseAdmin.openAddScheduleModal()">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+              Add Entry
+            </button>
+          </div>
+        </div>
+
+        <div class="data-table-wrap">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Room</th>
+                <th>Day</th>
+                <th>Time Slot</th>
+                <th>Section</th>
+                <th>Subject</th>
+                <th style="width: 150px;">Actions</th>
+              </tr>
+            </thead>
+            <tbody id="adminTimetableTableBody"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- TAB 6: SETTINGS -->
+      <div id="tab-settings" class="admin-panel">
+        <div style="background: #ffffff; border: 1px solid var(--border-light); border-radius: var(--radius-xl); padding: 28px; box-shadow: var(--shadow-sm); max-width: 640px;">
+          <h3 style="font-size: 1.3rem; font-weight: 800; color: var(--primary-900); margin-bottom: 6px;">System Configuration</h3>
+          <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 24px;">Adjust college operating hours, block branding, and administrator security password.</p>
+
+          <form id="adminSettingsForm" onsubmit="event.preventDefault(); window.RoomwiseAdmin.saveSettings();">
+            <div class="form-group" style="margin-bottom: 16px;">
+              <label for="setCollegeName">College / Institute Name</label>
+              <input type="text" id="setCollegeName" class="form-input" required>
+            </div>
+
+            <div class="form-group" style="margin-bottom: 16px;">
+              <label for="setBuildingName">Building / Block Name</label>
+              <input type="text" id="setBuildingName" class="form-input" required>
+            </div>
+
+            <div class="admin-form-2col" style="margin-bottom: 16px;">
+              <div class="form-group">
+                <label for="setOpStart">Operating Hours Start</label>
+                <input type="time" id="setOpStart" class="form-input" required>
+              </div>
+              <div class="form-group">
+                <label for="setOpEnd">Operating Hours End</label>
+                <input type="time" id="setOpEnd" class="form-input" required>
+              </div>
+            </div>
+
+            <div class="form-group" style="margin-bottom: 24px;">
+              <label for="setAdminPassword">Update Admin Password (Optional)</label>
+              <input type="password" id="setAdminPassword" class="form-input" placeholder="Leave blank to keep current password" autocomplete="new-password">
+              <small style="color: var(--text-muted); font-size: 0.75rem;">Stored securely using salted SHA-256 hashing. Minimum 6 characters.</small>
+            </div>
+
+            <button type="submit" class="btn btn-primary" id="btnSaveSettings">
+              Save Configuration
+            </button>
+          </form>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <!-- Modal: Add / Edit Floor -->
+  <div class="modal-overlay" id="floorModalOverlay" onclick="if (event.target === this) window.RoomwiseAdmin.closeModals();">
+    <div class="modal-card" style="max-width: 480px;">
+      <div class="modal-header">
+        <h3 class="modal-title" id="floorModalTitle">Add New Floor</h3>
+        <button type="button" class="modal-close-btn" onclick="window.RoomwiseAdmin.closeModals()">&times;</button>
+      </div>
+      <form id="floorModalForm" onsubmit="event.preventDefault(); window.RoomwiseAdmin.saveFloor();">
+        <div class="modal-body">
+          <div class="form-group" style="margin-bottom: 14px;">
+            <label for="modalFloorNumber">Floor Level Number</label>
+            <input type="number" id="modalFloorNumber" class="form-input" min="1" max="100" required>
+          </div>
+          <div class="form-group" style="margin-bottom: 14px;">
+            <label for="modalFloorName">Floor Wing Name</label>
+            <input type="text" id="modalFloorName" class="form-input" placeholder="e.g. Floor 10 - Research Annex" required>
+          </div>
+          <div class="form-group">
+            <label for="modalFloorDesc">Description</label>
+            <textarea id="modalFloorDesc" class="form-input" style="height: 70px; padding: 10px;" placeholder="Optional floor details..."></textarea>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary btn-sm" onclick="window.RoomwiseAdmin.closeModals()">Cancel</button>
+          <button type="submit" class="btn btn-primary btn-sm">Save Floor</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Modal: Add / Edit Classroom -->
+  <div class="modal-overlay" id="roomModalOverlay" onclick="if (event.target === this) window.RoomwiseAdmin.closeModals();">
+    <div class="modal-card" style="max-width: 480px;">
+      <div class="modal-header">
+        <h3 class="modal-title" id="roomModalTitle">Add Classroom</h3>
+        <button type="button" class="modal-close-btn" onclick="window.RoomwiseAdmin.closeModals()">&times;</button>
+      </div>
+      <form id="roomModalForm" onsubmit="event.preventDefault(); window.RoomwiseAdmin.saveRoom();">
+        <input type="hidden" id="modalRoomOriginalNumber">
+        <div class="modal-body">
+          <div class="form-group" style="margin-bottom: 14px;">
+            <label for="modalRoomNumber">Room Number</label>
+            <input type="text" id="modalRoomNumber" class="form-input" placeholder="e.g. 101, 204" required>
+          </div>
+          <div class="form-group" style="margin-bottom: 14px;">
+            <label for="modalRoomFloor">Assigned Floor</label>
+            <select id="modalRoomFloor" class="form-select" required></select>
+          </div>
+          <div class="admin-form-2col">
+            <div class="form-group">
+              <label for="modalRoomCapacity">Capacity</label>
+              <input type="number" id="modalRoomCapacity" class="form-input" value="60" min="1" max="2000" required>
+            </div>
+            <div class="form-group">
+              <label for="modalRoomType">Room Type</label>
+              <select id="modalRoomType" class="form-select">
+                <option value="Lecture Hall">Lecture Hall</option>
+                <option value="Smart Lecture Hall">Smart Lecture Hall</option>
+                <option value="Computing Laboratory">Computing Laboratory</option>
+                <option value="Seminar & Tutorial Room">Seminar &amp; Tutorial Room</option>
+                <option value="Standard Classroom">Standard Classroom</option>
+              </select>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary btn-sm" onclick="window.RoomwiseAdmin.closeModals()">Cancel</button>
+          <button type="submit" class="btn btn-primary btn-sm">Save Classroom</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Modal: Add / Edit Schedule Entry -->
+  <div class="modal-overlay" id="scheduleModalOverlay" onclick="if (event.target === this) window.RoomwiseAdmin.closeModals();">
+    <div class="modal-card" style="max-width: 520px;">
+      <div class="modal-header">
+        <h3 class="modal-title" id="scheduleModalTitle">Schedule Lecture</h3>
+        <button type="button" class="modal-close-btn" onclick="window.RoomwiseAdmin.closeModals()">&times;</button>
+      </div>
+      <form id="scheduleModalForm" onsubmit="event.preventDefault(); window.RoomwiseAdmin.saveScheduleEntry();">
+        <input type="hidden" id="modalScheduleId">
+        <div class="modal-body">
+          <div class="admin-form-2col" style="margin-bottom: 14px;">
+            <div class="form-group">
+              <label for="modalScheduleRoom">Room Number</label>
+              <input type="text" id="modalScheduleRoom" class="form-input" placeholder="e.g. 101" required>
+            </div>
+            <div class="form-group">
+              <label for="modalScheduleDay">Day of Week</label>
+              <select id="modalScheduleDay" class="form-select" required>
+                <option value="Monday">Monday</option>
+                <option value="Tuesday">Tuesday</option>
+                <option value="Wednesday">Wednesday</option>
+                <option value="Thursday">Thursday</option>
+                <option value="Friday">Friday</option>
+                <option value="Saturday">Saturday</option>
+                <option value="Sunday">Sunday</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="admin-form-2col" style="margin-bottom: 14px;">
+            <div class="form-group">
+              <label for="modalScheduleSection">Class / Section</label>
+              <input type="text" id="modalScheduleSection" class="form-input" placeholder="e.g. CS-2A" required>
+            </div>
+            <div class="form-group">
+              <label for="modalScheduleSubject">Subject</label>
+              <input type="text" id="modalScheduleSubject" class="form-input" placeholder="e.g. Data Structures" required>
+            </div>
+          </div>
+
+          <div class="admin-form-2col">
+            <div class="form-group">
+              <label for="modalScheduleStartTime">Start Time</label>
+              <input type="time" id="modalScheduleStartTime" class="form-input" required>
+            </div>
+            <div class="form-group">
+              <label for="modalScheduleEndTime">End Time</label>
+              <input type="time" id="modalScheduleEndTime" class="form-input" required>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary btn-sm" onclick="window.RoomwiseAdmin.closeModals()">Cancel</button>
+          <button type="submit" class="btn btn-primary btn-sm">Save Schedule</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Toast Container -->
+  <div class="toast-container" id="adminToastContainer"></div>
+
+  <!-- Runtime API Config & Admin Script -->
+  <script src="config.js"></script>
+  <script src="admin.js"></script>
+</body>
+</html>
